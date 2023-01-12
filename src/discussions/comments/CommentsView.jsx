@@ -10,7 +10,7 @@ import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import {
   Button, Icon, IconButton, Spinner,
 } from '@edx/paragon';
-import { ArrowBack } from '@edx/paragon/icons';
+import { ArrowBack, ExpandLess, ExpandMore } from '@edx/paragon/icons';
 
 import {
   EndorsementStatus, PostsPages, ThreadType,
@@ -23,7 +23,10 @@ import { Post } from '../posts';
 import { selectThread } from '../posts/data/selectors';
 import { fetchThread, markThreadAsRead } from '../posts/data/thunks';
 import { discussionsPath, filterPosts } from '../utils';
-import { selectThreadComments, selectThreadCurrentPage, selectThreadHasMorePages } from './data/selectors';
+import {
+  selectCommentSortedBy, selectThreadComments, selectThreadCurrentPage, selectThreadHasMorePages,
+} from './data/selectors';
+import { setCommentSortedBy } from './data/slices';
 import { fetchThreadComments } from './data/thunks';
 import { Comment, ResponseEditor } from './comment';
 import messages from './messages';
@@ -71,6 +74,8 @@ function DiscussionCommentsView({
   endorsed,
   isClosed,
 }) {
+  const dispatch = useDispatch();
+  const commentSortedBy = useSelector(selectCommentSortedBy);
   const {
     comments,
     hasMorePages,
@@ -81,9 +86,25 @@ function DiscussionCommentsView({
   const endorsedComments = useMemo(() => [...filterPosts(comments, 'endorsed')], [comments]);
   const unEndorsedComments = useMemo(() => [...filterPosts(comments, 'unendorsed')], [comments]);
 
+  const handleCommentsSort = (sort) => {
+    dispatch(setCommentSortedBy(sort));
+  };
+
   const handleDefinition = (message, commentsLength) => (
-    <div className="mx-4 text-primary-700" role="heading" aria-level="2" style={{ lineHeight: '28px' }}>
-      {intl.formatMessage(message, { num: commentsLength })}
+    <div
+      className="mx-4 text-primary-700 d-flex justify-content-between align-items-center"
+      role="heading"
+      aria-level="2"
+      style={{ lineHeight: '28px' }}
+    >
+      <span>
+        {intl.formatMessage(message, { num: commentsLength })}
+      </span>
+      <span>
+        <Button variant="tertiary" size="sm" iconAfter={ExpandLess} className="mb-2 mb-sm-0">
+          {intl.formatMessage(messages.oldestFirst)}
+        </Button>
+      </span>
     </div>
   );
 
