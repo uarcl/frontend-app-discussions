@@ -10,7 +10,7 @@ import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import {
   Button, Icon, IconButton, Spinner,
 } from '@edx/paragon';
-import { ArrowBack, ExpandLess, ExpandMore } from '@edx/paragon/icons';
+import { ArrowBack } from '@edx/paragon/icons';
 
 import {
   EndorsementStatus, PostsPages, ThreadType,
@@ -23,10 +23,10 @@ import { Post } from '../posts';
 import { selectThread } from '../posts/data/selectors';
 import { fetchThread, markThreadAsRead } from '../posts/data/thunks';
 import { discussionsPath, filterPosts } from '../utils';
+import CommentSortDropdown from './comment/CommentSortDropdown';
 import {
   selectCommentSortedBy, selectThreadComments, selectThreadCurrentPage, selectThreadHasMorePages,
 } from './data/selectors';
-import { setCommentSortedBy } from './data/slices';
 import { fetchThreadComments } from './data/thunks';
 import { Comment, ResponseEditor } from './comment';
 import messages from './messages';
@@ -47,16 +47,21 @@ function usePost(postId) {
 function usePostComments(postId, endorsed = null) {
   const [isLoading, dispatch] = useDispatchWithState();
   const comments = useSelector(selectThreadComments(postId, endorsed));
+  const sortedBy = useSelector(selectCommentSortedBy);
   const hasMorePages = useSelector(selectThreadHasMorePages(postId, endorsed));
   const currentPage = useSelector(selectThreadCurrentPage(postId, endorsed));
+
   const handleLoadMoreResponses = async () => dispatch(fetchThreadComments(postId, {
     endorsed,
     page: currentPage + 1,
+    sortedBy,
   }));
+
   useEffect(() => {
     dispatch(fetchThreadComments(postId, {
       endorsed,
       page: 1,
+      sortedBy,
     }));
   }, [postId]);
   return {
@@ -74,8 +79,6 @@ function DiscussionCommentsView({
   endorsed,
   isClosed,
 }) {
-  const dispatch = useDispatch();
-  const commentSortedBy = useSelector(selectCommentSortedBy);
   const {
     comments,
     hasMorePages,
@@ -85,10 +88,6 @@ function DiscussionCommentsView({
 
   const endorsedComments = useMemo(() => [...filterPosts(comments, 'endorsed')], [comments]);
   const unEndorsedComments = useMemo(() => [...filterPosts(comments, 'unendorsed')], [comments]);
-
-  const handleCommentsSort = (sort) => {
-    dispatch(setCommentSortedBy(sort));
-  };
 
   const handleDefinition = (message, commentsLength) => (
     <div
@@ -100,11 +99,7 @@ function DiscussionCommentsView({
       <span>
         {intl.formatMessage(message, { num: commentsLength })}
       </span>
-      <span>
-        <Button variant="tertiary" size="sm" iconAfter={ExpandLess} className="mb-2 mb-sm-0">
-          {intl.formatMessage(messages.oldestFirst)}
-        </Button>
-      </span>
+      <CommentSortDropdown />
     </div>
   );
 
