@@ -19,7 +19,6 @@ const baseConfig = {
       ['\\\\[', '\\\\]'],
       ['\\[', '\\]'],
       ['\\begin{displaymath}', '\\end{displaymath}'],
-      ['\\begin{equation}', '\\end{equation}'],
     ],
   },
 
@@ -27,27 +26,14 @@ const baseConfig = {
 };
 
 function HTMLLoader({ htmlNode, componentId, cssClassName }) {
-  const isLatex = htmlNode.match(/(\${1,2})((?:\\.|.)*)\1/)
-                  || htmlNode.match(/(\[mathjax](.+?)\[\/mathjax])+/)
-                  || htmlNode.match(/(\[mathjaxinline](.+?)\[\/mathjaxinline])+/)
-                  || htmlNode.match(/(\\begin\{math}(.+?)\\end\{math})+/)
-                  || htmlNode.match(/(\\begin\{displaymath}(.+?)\\end\{displaymath})+/)
-                  || htmlNode.match(/(\\begin\{equation}(.+?)\\end\{equation})+/)
-                  || htmlNode.match(/(\\\[(.+?)\\\])+/)
-                  || htmlNode.match(/(\\\((.+?)\\\))+/);
-
   return (
-    isLatex ? (
-      <MathJax
-        math={htmlNode}
-        id={componentId}
-        className={cssClassName}
-        sanitizeOptions={{ USE_PROFILES: { html: true } }}
-        config={baseConfig}
-      />
-    )
-      // eslint-disable-next-line react/no-danger
-      : <div className={cssClassName} id={componentId} dangerouslySetInnerHTML={{ __html: htmlNode }} />
+    <MathJax
+      math={htmlNode}
+      id={componentId}
+      className={cssClassName}
+      sanitizeOptions={{ USE_PROFILES: { html: true } }}
+      config={baseConfig}
+    />
   );
 }
 
