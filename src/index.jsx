@@ -4,8 +4,8 @@ import 'regenerator-runtime/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { messages as footerMessages } from '@edx/frontend-component-footer';
-import { messages as headerMessages } from '@edx/frontend-component-header';
+import { messages as footerMessages } from '@uarcl/frontend-component-footer-uar';
+import { messages as headerMessages } from '@uarcl/frontend-component-header-uar';
 import {
   APP_INIT_ERROR, APP_READY, initialize, mergeConfig,
   subscribe,

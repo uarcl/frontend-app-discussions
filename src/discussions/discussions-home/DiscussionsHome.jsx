@@ -6,8 +6,8 @@ import {
   Route, Switch, useLocation, useRouteMatch,
 } from 'react-router';
 
-import Footer from '@edx/frontend-component-footer';
-import { LearningHeader as Header } from '@edx/frontend-component-header';
+import Footer from '@uarcl/frontend-component-footer-uar';
+import { LearningHeader as Header } from '@uarcl/frontend-component-header-uar';
 import { getConfig } from '@edx/frontend-platform';
 
 import { PostActionsBar } from '../../components';
