@@ -224,15 +224,21 @@ header {
 .min-content-height {
   min-height: 80vh;
 }
-
-.header-action-bar {
+.header-action-bar{
   background-color: #fff;
-  z-index: 2002;
   box-shadow: 0px 2px 4px rgb(0 0 0 / 15%), 0px 2px 8px rgb(0 0 0 / 15%);
-  position: sticky;
-  top: 60px;
 }
-
+@media (min-width: 769px){
+  .header-action-bar {
+    z-index: 2002;
+    position: sticky;
+    top: 60px;
+  }
+}
+.header-action-bar .nav-pills .nav-item{
+  margin-left: 0.25rem!important;
+  margin-right: 0.25rem!important;
+}
 .breadcrumb-menu {
   z-index: 1;
 }
