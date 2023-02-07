@@ -38,7 +38,7 @@
     "@edx/paragon": "20.15.0",
     "@reduxjs/toolkit": "1.8.0",
     "@tinymce/tinymce-react": "3.13.1",
-    "@uarcl/frontend-component-footer-uar": "1.0.27",
+    "@uarcl/frontend-component-footer-uar": "1.0.28",
     "@uarcl/frontend-component-header-uar": "1.0.11",
     "babel-polyfill": "6.26.0",
     "classnames": "2.3.1",
