@@ -84,7 +84,7 @@ export default function DiscussionsHome() {
     }}
     >
       {!inContext && <Header courseOrg={org} courseNumber={courseNumber} courseTitle={courseTitle} />}
-      <main className="container-fluid d-flex flex-column p-0 w-100" id="main" tabIndex="-1">
+      <main className="container-fluid d-flex flex-column w-100" id="main" tabIndex="-1">
         {!inContext && <CourseTabsNavigation activeTab="discussion" courseId={courseId} />}
         <div
           className={classNames('header-action-bar', { 'shadow-none border-light-300 border-bottom': inContext })}
