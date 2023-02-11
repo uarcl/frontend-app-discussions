@@ -39,7 +39,7 @@
     "@reduxjs/toolkit": "1.8.0",
     "@tinymce/tinymce-react": "3.13.1",
     "@uarcl/frontend-component-footer-uar": "1.0.30",
-    "@uarcl/frontend-component-header-uar": "1.0.14",
+    "@uarcl/frontend-component-header-uar": "1.0.15",
     "babel-polyfill": "6.26.0",
     "classnames": "2.3.1",
     "core-js": "3.21.1",
