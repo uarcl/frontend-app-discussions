@@ -233,6 +233,7 @@ header {
     z-index: 2002;
     position: sticky;
     top: 140px;
+    margin-top: 12px;
   }
 }
 .header-action-bar .nav-pills .nav-item{
@@ -259,4 +260,7 @@ header {
   body:not(.tox-force-desktop) .tox .tox-dialog {
     align-self: center;
   }
+}
+.btn-uar-header-icon{
+  vertical-align: unset !important;
 }

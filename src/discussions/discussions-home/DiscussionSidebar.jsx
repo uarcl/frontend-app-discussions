@@ -43,7 +43,7 @@ export default function DiscussionSidebar({ displaySidebar, postActionBarRef }) 
   return (
     <div
       ref={sidebarRef}
-      className={classNames('flex-column  position-sticky', {
+      className={classNames('uar-disc-sidebar flex-column  position-sticky', {
         'd-none': !displaySidebar,
         'd-flex overflow-auto': displaySidebar,
         'w-100': !isOnDesktop,

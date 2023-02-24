@@ -66,7 +66,6 @@ function Search({ intl }) {
         <SearchField.Label />
         <SearchField.Input
           style={{ paddingRight: '1rem' }}
-          placeholder={intl.formatMessage(postsMessages.search, { page: camelCase(page) })}
         />
         <span className="mt-auto mb-auto mr-2.5 pointer-cursor-hover">
           <Icon
