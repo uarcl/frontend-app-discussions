@@ -9,6 +9,7 @@ import { messages as headerMessages } from '@uarcl/frontend-component-header-uar
 import {
   APP_INIT_ERROR, APP_READY, initialize, mergeConfig,
   subscribe,
+  getConfig 
 } from '@edx/frontend-platform';
 import { AppProvider, ErrorPage } from '@edx/frontend-platform/react';
 import { messages as paragonMessages } from '@edx/paragon';
