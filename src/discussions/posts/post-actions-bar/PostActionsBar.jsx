@@ -46,14 +46,14 @@ function PostActionsBar({
       {(!inBlackoutDateRange(blackoutDateRange) && loadingStatus === RequestStatus.SUCCESSFUL) && (
         <>
           {!inContext && showStaffLink && <div className="border-right border-light-400 mx-3" />}
-          <Button
+          { showStaffLink &&  <Button
             variant={inContext ? 'plain' : 'brand'}
             className={classNames('my-0', { 'p-0': inContext })}
             onClick={() => dispatch(showPostEditor())}
             size={inContext ? 'md' : 'sm'}
           >
             {intl.formatMessage(messages.addAPost)}
-          </Button>
+          </Button>}
         </>
       )}
       {inContext && (
