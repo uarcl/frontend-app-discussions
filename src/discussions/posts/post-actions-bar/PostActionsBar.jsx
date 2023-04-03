@@ -12,7 +12,7 @@ import { Close } from '@edx/paragon/icons';
 
 import Search from '../../../components/Search';
 import { RequestStatus } from '../../../data/constants';
-import { selectBlackoutDate, selectconfigLoadingStatus } from '../../data/selectors';
+import { selectBlackoutDate, selectconfigLoadingStatus , selectUserRoles ,selectUserIsStaff } from '../../data/selectors';
 import { inBlackoutDateRange, postMessageToParent } from '../../utils';
 import { showPostEditor } from '../data';
 import messages from './messages';
@@ -26,6 +26,10 @@ function PostActionsBar({
   const dispatch = useDispatch();
   const loadingStatus = useSelector(selectconfigLoadingStatus);
   const blackoutDateRange = useSelector(selectBlackoutDate);
+
+  const userRoles = useSelector(selectUserRoles);
+  const isAdmin = useSelector(selectUserIsStaff);
+  const showStaffLink = isAdmin || userRoles.includes('Moderator') || userRoles.includes('Administrator');
 
   const handleCloseInContext = () => {
     postMessageToParent('learning.events.sidebar.close');
@@ -41,7 +45,7 @@ function PostActionsBar({
       )}
       {(!inBlackoutDateRange(blackoutDateRange) && loadingStatus === RequestStatus.SUCCESSFUL) && (
         <>
-          {!inContext && <div className="border-right border-light-400 mx-3" />}
+          {!inContext && showStaffLink && <div className="border-right border-light-400 mx-3" />}
           <Button
             variant={inContext ? 'plain' : 'brand'}
             className={classNames('my-0', { 'p-0': inContext })}
