@@ -25,11 +25,6 @@ function EmptyPage({
         <EmptyIcon />
         <h3 className="pt-3">{title}</h3>
         {subTitle && <p className="pb-2">{subTitle}</p>}
-        {action && actionText && (
-          <Button onClick={action} variant="outline-dark">
-            {actionText}
-          </Button>
-        )}
       </div>
     </div>
   );
